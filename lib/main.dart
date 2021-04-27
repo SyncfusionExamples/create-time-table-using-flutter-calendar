@@ -13,10 +13,11 @@ class AppointmentWithoutWeekends extends StatefulWidget {
 
 class CalendarAppointment extends State<AppointmentWithoutWeekends> {
   CalendarDataSource? _dataSource;
-  List<String>? _subjectCollection;
-  List<DateTime>? _startTimeCollection, _endTimeCollection;
-  List<Color>? _colorCollection;
-  List<TimeRegion>? _specialTimeRegion=<TimeRegion>[];
+  final List<String> _subjectCollection = <String>[];
+  final List<DateTime> _startTimeCollection= <DateTime>[];
+  final List<DateTime> _endTimeCollection=<DateTime>[];
+  final List<Color> _colorCollection=<Color>[];
+  List<TimeRegion> _specialTimeRegion=<TimeRegion>[];
 
   @override
   void initState() {
@@ -76,27 +77,27 @@ class CalendarAppointment extends State<AppointmentWithoutWeekends> {
           _specialTimeRegion = _timeRegion;
         });
       });
-      for (int j = 0; j < _startTimeCollection!.length; j++) {
+      for (int j = 0; j < _startTimeCollection.length; j++) {
         DateTime startTime = new DateTime(
             visibleDates[i].year,
             visibleDates[i].month,
             visibleDates[i].day,
-            _startTimeCollection![j].hour,
-            _startTimeCollection![j].minute,
-            _startTimeCollection![j].second);
+            _startTimeCollection[j].hour,
+            _startTimeCollection[j].minute,
+            _startTimeCollection[j].second);
         DateTime endTime = new DateTime(
             visibleDates[i].year,
             visibleDates[i].month,
             visibleDates[i].day,
-            _endTimeCollection![j].hour,
-            _endTimeCollection![j].minute,
-            _endTimeCollection![j].second);
+            _endTimeCollection[j].hour,
+            _endTimeCollection[j].minute,
+            _endTimeCollection[j].second);
         Random random = Random();
         appointments.add(Appointment(
             startTime: startTime,
             endTime: endTime,
-            subject: _subjectCollection![random.nextInt(9)],
-            color: _colorCollection![random.nextInt(9)]));
+            subject: _subjectCollection[random.nextInt(9)],
+            color: _colorCollection[random.nextInt(9)]));
       }
     }
     for (int i = 0; i < appointments.length; i++) {
@@ -107,79 +108,75 @@ class CalendarAppointment extends State<AppointmentWithoutWeekends> {
   }
 
   void _getSubjectCollection() {
-    _subjectCollection = <String>[];
-    _subjectCollection!.add('General Meeting');
-    _subjectCollection!.add('Plan Execution');
-    _subjectCollection!.add('Project Plan');
-    _subjectCollection!.add('Consulting');
-    _subjectCollection!.add('Support');
-    _subjectCollection!.add('Development Meeting');
-    _subjectCollection!.add('Scrum');
-    _subjectCollection!.add('Project Completion');
-    _subjectCollection!.add('Release updates');
-    _subjectCollection!.add('Performance Check');
+    _subjectCollection.add('General Meeting');
+    _subjectCollection.add('Plan Execution');
+    _subjectCollection.add('Project Plan');
+    _subjectCollection.add('Consulting');
+    _subjectCollection.add('Support');
+    _subjectCollection.add('Development Meeting');
+    _subjectCollection.add('Scrum');
+    _subjectCollection.add('Project Completion');
+    _subjectCollection.add('Release updates');
+    _subjectCollection.add('Performance Check');
   }
 
   void _getStartTimeCollection() {
-    _startTimeCollection = <DateTime>[];
     var currentDateTime = DateTime.now();
 
-    _startTimeCollection!.add(new DateTime(currentDateTime.year,
+    _startTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 9, 0, 0));
-    _startTimeCollection!.add(new DateTime(currentDateTime.year,
+    _startTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 10, 0, 0));
-    _startTimeCollection!.add(new DateTime(currentDateTime.year,
+    _startTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 11, 0, 0));
-    _startTimeCollection!.add(new DateTime(currentDateTime.year,
+    _startTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 12, 0, 0));
-    _startTimeCollection!.add(new DateTime(currentDateTime.year,
+    _startTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 14, 0, 0));
-    _startTimeCollection!.add(new DateTime(currentDateTime.year,
+    _startTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 15, 0, 0));
-    _startTimeCollection!.add(new DateTime(currentDateTime.year,
+    _startTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 16, 0, 0));
-    _startTimeCollection!.add(new DateTime(currentDateTime.year,
+    _startTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 17, 0, 0));
-    _startTimeCollection!.add(new DateTime(currentDateTime.year,
+    _startTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 18, 0, 0));
 
   }
 
   void _getEndTimeCollection() {
-    _endTimeCollection = <DateTime>[];
     var currentDateTime = DateTime.now();
-    _endTimeCollection!.add(new DateTime(currentDateTime.year,
+    _endTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 10, 0, 0));
-    _endTimeCollection!.add(new DateTime(currentDateTime.year,
+    _endTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 11, 0, 0));
-    _endTimeCollection!.add(new DateTime(currentDateTime.year,
+    _endTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 12, 0, 0));
-    _endTimeCollection!.add(new DateTime(currentDateTime.year,
+    _endTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 13, 0, 0));
-    _endTimeCollection!.add(new DateTime(currentDateTime.year,
+    _endTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 15, 0, 0));
-    _endTimeCollection!.add(new DateTime(currentDateTime.year,
+    _endTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 16, 0, 0));
-    _endTimeCollection!.add(new DateTime(currentDateTime.year,
+    _endTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 17, 0, 0));
-    _endTimeCollection!.add(new DateTime(currentDateTime.year,
+    _endTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 18, 0, 0));
-    _endTimeCollection!.add(new DateTime(currentDateTime.year,
+    _endTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 19, 0, 0));
   }
 
   void _getColorCollection() {
-    _colorCollection = <Color>[];
-    _colorCollection!.add(const Color(0xFF0F8644));
-    _colorCollection!.add(const Color(0xFF8B1FA9));
-    _colorCollection!.add(const Color(0xFFD20100));
-    _colorCollection!.add(const Color(0xFFFC571D));
-    _colorCollection!.add(const Color(0xFF36B37B));
-    _colorCollection!.add(const Color(0xFF01A1EF));
-    _colorCollection!.add(const Color(0xFF3D4FB5));
-    _colorCollection!.add(const Color(0xFFE47C73));
-    _colorCollection!.add(const Color(0xFF636363));
-    _colorCollection!.add(const Color(0xFF0A8043));
+    _colorCollection.add(const Color(0xFF0F8644));
+    _colorCollection.add(const Color(0xFF8B1FA9));
+    _colorCollection.add(const Color(0xFFD20100));
+    _colorCollection.add(const Color(0xFFFC571D));
+    _colorCollection.add(const Color(0xFF36B37B));
+    _colorCollection.add(const Color(0xFF01A1EF));
+    _colorCollection.add(const Color(0xFF3D4FB5));
+    _colorCollection.add(const Color(0xFFE47C73));
+    _colorCollection.add(const Color(0xFF636363));
+    _colorCollection.add(const Color(0xFF0A8043));
   }
 }
 
