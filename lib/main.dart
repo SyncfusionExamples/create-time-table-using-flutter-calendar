@@ -12,12 +12,12 @@ class AppointmentWithoutWeekends extends StatefulWidget {
 }
 
 class CalendarAppointment extends State<AppointmentWithoutWeekends> {
-  final CalendarDataSource _dataSource = _DataSource(<Appointment>[]);
-  final List<String> _subjectCollection = <String>[];
-  final List<DateTime> _startTimeCollection = <DateTime>[];
-  final List<DateTime> _endTimeCollection = <DateTime>[];
-  final List<Color> _colorCollection = <Color>[];
-  List<TimeRegion> _specialTimeRegion = <TimeRegion>[];
+  CalendarDataSource _dataSource=_DataSource(<Appointment>[]);
+   List<String> _subjectCollection = <String>[];
+   List<DateTime> _startTimeCollection= <DateTime>[];
+   List<DateTime> _endTimeCollection=<DateTime>[];
+   List<Color> _colorCollection=<Color>[];
+   List<TimeRegion> _specialTimeRegion=<TimeRegion>[];
 
   @override
   void initState() {
@@ -70,9 +70,7 @@ class CalendarAppointment extends State<AppointmentWithoutWeekends> {
           startTime: DateTime(visibleDates[i].year, visibleDates[i].month,
               visibleDates[i].day, 13, 0, 0),
           endTime: DateTime(visibleDates[i].year, visibleDates[i].month,
-              visibleDates[i].day, 14, 0, 0),
-          text: 'Break',
-          enablePointerInteraction: false));
+              visibleDates[i].day, 14, 0, 0),text: 'Break',enablePointerInteraction: false));
       SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
         setState(() {
           _specialTimeRegion = _timeRegion;
@@ -142,6 +140,7 @@ class CalendarAppointment extends State<AppointmentWithoutWeekends> {
         currentDateTime.month, currentDateTime.day, 17, 0, 0));
     _startTimeCollection.add(new DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 18, 0, 0));
+
   }
 
   void _getEndTimeCollection() {
