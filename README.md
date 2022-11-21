@@ -63,7 +63,7 @@ void viewChanged(ViewChangedDetails viewChangedDetails) {
 
 ```
 
-
+![Timetable](https://user-images.githubusercontent.com/46158936/203065284-d922b7cb-9772-431d-a1cf-95480f179d5e.gif)
 
 ## Requirements to run the demo
 * [VS Code](https://code.visualstudio.com/download)
