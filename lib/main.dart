@@ -1,17 +1,18 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/widgets.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-void main() => runApp(AppointmentWithoutWeekends());
+void main() => runApp(const TimeTableCalendar());
 
-class AppointmentWithoutWeekends extends StatefulWidget {
+class TimeTableCalendar extends StatefulWidget {
+  const TimeTableCalendar({super.key});
+
   @override
   CalendarAppointment createState() => CalendarAppointment();
 }
 
-class CalendarAppointment extends State<AppointmentWithoutWeekends> {
+class CalendarAppointment extends State<TimeTableCalendar> {
   final CalendarDataSource _dataSource = _DataSource(<Appointment>[]);
   final List<String> _subjectCollection = <String>[];
   final List<DateTime> _startTimeCollection = <DateTime>[];
@@ -37,7 +38,7 @@ class CalendarAppointment extends State<AppointmentWithoutWeekends> {
           child: SfCalendar(
             dataSource: _dataSource,
             view: CalendarView.week,
-            allowedViews: [
+            allowedViews: const [
               CalendarView.day,
               CalendarView.week,
               CalendarView.workWeek,
@@ -58,7 +59,7 @@ class CalendarAppointment extends State<AppointmentWithoutWeekends> {
 
   void viewChanged(ViewChangedDetails viewChangedDetails) {
     List<DateTime> visibleDates = viewChangedDetails.visibleDates;
-    List<TimeRegion> _timeRegion = <TimeRegion>[];
+    List<TimeRegion> timeRegion = <TimeRegion>[];
     List<Appointment> appointments = <Appointment>[];
     _dataSource.appointments!.clear();
 
@@ -66,27 +67,27 @@ class CalendarAppointment extends State<AppointmentWithoutWeekends> {
       if (visibleDates[i].weekday == 6 || visibleDates[i].weekday == 7) {
         continue;
       }
-      _timeRegion.add(TimeRegion(
+      timeRegion.add(TimeRegion(
           startTime: DateTime(visibleDates[i].year, visibleDates[i].month,
               visibleDates[i].day, 13, 0, 0),
           endTime: DateTime(visibleDates[i].year, visibleDates[i].month,
               visibleDates[i].day, 14, 0, 0),
           text: 'Break',
           enablePointerInteraction: false));
-      SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
         setState(() {
-          _specialTimeRegion = _timeRegion;
+          _specialTimeRegion = timeRegion;
         });
       });
       for (int j = 0; j < _startTimeCollection.length; j++) {
-        DateTime startTime = new DateTime(
+        DateTime startTime = DateTime(
             visibleDates[i].year,
             visibleDates[i].month,
             visibleDates[i].day,
             _startTimeCollection[j].hour,
             _startTimeCollection[j].minute,
             _startTimeCollection[j].second);
-        DateTime endTime = new DateTime(
+        DateTime endTime = DateTime(
             visibleDates[i].year,
             visibleDates[i].month,
             visibleDates[i].day,
@@ -124,45 +125,45 @@ class CalendarAppointment extends State<AppointmentWithoutWeekends> {
   void _getStartTimeCollection() {
     var currentDateTime = DateTime.now();
 
-    _startTimeCollection.add(new DateTime(currentDateTime.year,
+    _startTimeCollection.add(DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 9, 0, 0));
-    _startTimeCollection.add(new DateTime(currentDateTime.year,
+    _startTimeCollection.add(DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 10, 0, 0));
-    _startTimeCollection.add(new DateTime(currentDateTime.year,
+    _startTimeCollection.add(DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 11, 0, 0));
-    _startTimeCollection.add(new DateTime(currentDateTime.year,
+    _startTimeCollection.add(DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 12, 0, 0));
-    _startTimeCollection.add(new DateTime(currentDateTime.year,
+    _startTimeCollection.add(DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 14, 0, 0));
-    _startTimeCollection.add(new DateTime(currentDateTime.year,
+    _startTimeCollection.add(DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 15, 0, 0));
-    _startTimeCollection.add(new DateTime(currentDateTime.year,
+    _startTimeCollection.add(DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 16, 0, 0));
-    _startTimeCollection.add(new DateTime(currentDateTime.year,
+    _startTimeCollection.add(DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 17, 0, 0));
-    _startTimeCollection.add(new DateTime(currentDateTime.year,
+    _startTimeCollection.add(DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 18, 0, 0));
   }
 
   void _getEndTimeCollection() {
     var currentDateTime = DateTime.now();
-    _endTimeCollection.add(new DateTime(currentDateTime.year,
+    _endTimeCollection.add(DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 10, 0, 0));
-    _endTimeCollection.add(new DateTime(currentDateTime.year,
+    _endTimeCollection.add(DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 11, 0, 0));
-    _endTimeCollection.add(new DateTime(currentDateTime.year,
+    _endTimeCollection.add(DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 12, 0, 0));
-    _endTimeCollection.add(new DateTime(currentDateTime.year,
+    _endTimeCollection.add(DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 13, 0, 0));
-    _endTimeCollection.add(new DateTime(currentDateTime.year,
+    _endTimeCollection.add(DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 15, 0, 0));
-    _endTimeCollection.add(new DateTime(currentDateTime.year,
+    _endTimeCollection.add(DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 16, 0, 0));
-    _endTimeCollection.add(new DateTime(currentDateTime.year,
+    _endTimeCollection.add(DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 17, 0, 0));
-    _endTimeCollection.add(new DateTime(currentDateTime.year,
+    _endTimeCollection.add(DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 18, 0, 0));
-    _endTimeCollection.add(new DateTime(currentDateTime.year,
+    _endTimeCollection.add(DateTime(currentDateTime.year,
         currentDateTime.month, currentDateTime.day, 19, 0, 0));
   }
 
